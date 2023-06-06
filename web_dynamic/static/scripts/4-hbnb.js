@@ -1,3 +1,5 @@
+// Variable to store the selected Amenity IDS
+const selectedAmenities = {};
 function searchPlaces () {
 // send a post request to places_search endpoint
   $.ajax({
@@ -6,7 +8,7 @@ function searchPlaces () {
     contentType: 'application/json',
     data: JSON.stringify({
       amenities: Object.keys(selectedAmenities)
-      }),
+    }),
     success: function (response) {
       // Clear existing places
       $('.places').empty();
@@ -32,12 +34,9 @@ function searchPlaces () {
       }
     }
   });
-}  
+}
 // Execute the script only when DOM is loaded
 $(document).ready(function () {
-  // Variable to store the selected Amenity IDS
-  const selectedAmenities = {};
-
   // Listen for changes on each input checkbox tag
   $('input["checkbox"]').change(function () {
     const amenityId = $(this).attr('data-id');
@@ -45,7 +44,7 @@ $(document).ready(function () {
 
     // Check if checkbox is checked
     if ($(this).is(':checked')) {
-      // Store the Amenity ID if the variable 
+      // Store the Amenity ID if the variable
       selectedAmenities[amenityId] = amenityName;
     } else {
       // Remove the Amenity ID from the variable
